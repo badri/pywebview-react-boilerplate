@@ -10,3 +10,4 @@ pythonnet==3.0.3; platform_system != "Darwin"
 pywebview==5.1
 pywin32==306; platform_system == "Windows"
 pywin32-ctypes==0.2.2; platform_system == "Windows"
+flask

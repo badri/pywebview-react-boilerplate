@@ -1,20 +1,19 @@
 {
-  "name": "pywebview-react-boilerplate",
+  "name": "pywebview-flask-boilerplate",
   "version": "1.0.0",
-  "description": "A simple boilerplate to get started with pywebview and React",
+  "description": "A simple boilerplate to get started with pywebview and Flask",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && npm run frontend:prod && run-script-os",
+    "build": "npm run clean && npm run build-css-prod && run-script-os",
     "build:macos": "./venv-pywebview/bin/python build-macos.py py2app",
     "build:windows": ".\\venv-pywebview\\Scripts\\pyinstaller build-windows.spec",
     "build:linux": "pyinstaller build-linux.spec",
+    "build-css": "tailwindcss -i ./src/input.css -o ./static/css/output.css --watch",
+    "build-css-prod": "tailwindcss -i ./src/input.css -o ./static/css/output.css --minify",
     "clean": "run-script-os",
-    "clean:default": "rm -rf dist 2>/dev/null; rm -rf gui 2>/dev/null; rm -rf build 2>/dev/null; ",
-    "clean:windows": "if exist dist rd /S /Q dist & if exist build rd /S /Q build & if exist gui rd /S /Q gui",
-    "dev": "vite ",
-    "frontend:dev": "vite build --outDir gui --emptyOutDir",
-    "frontend:prod": "vite build --outDir gui --emptyOutDir --minify",
-    "frontend:preview": "vite preview --outDir gui --emptyOutDir",
+    "clean:default": "rm -rf dist 2>/dev/null; rm -rf build 2>/dev/null; ",
+    "clean:windows": "if exist dist rd /S /Q dist & if exist build rd /S /Q build",
+    "dev": "npm run build-css-prod && run-script-os",
     "init": "npm install && run-script-os",
     "init:windows": "virtualenv -p python venv-pywebview && .\\venv-pywebview\\Scripts\\pip install -r requirements.txt",
     "init:linux": "virtualenv -p python3 venv-pywebview && if [[ -z \"${KDE_FULL_SESSION}\" ]]; then npm run init:qt5; else npm run init:gtk; fi",
@@ -23,7 +22,7 @@
     "init:gtk": "sudo apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 && ./venv-pywebview/bin/pip install -r requirements.txt",
     "start": "npm run frontend:dev && run-script-os",
     "start:windows": ".\\venv-pywebview\\Scripts\\python src\\index.py",
-    "start:default": "python src/index.py"
+    "start:default": "python3 src/index.py"
   },
   "repository": {
     "type": "git",
@@ -31,9 +30,9 @@
   },
   "keywords": [
     "pywebview",
-    "react",
+    "flask",
     "python",
-    "javascript"
+    "tailwindcss"
   ],
   "author": "Roman Sirokov",
   "license": "BSD-3-Clause",
@@ -41,15 +40,12 @@
     "url": "https://github.com/r0x0r/pywebview-react-boilerplate/issues"
   },
   "homepage": "https://github.com/r0x0r/pywebview-react-boilerplate#readme",
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.2.0",
-    "run-script-os": "^1.1.6",
-    "typescript": "^5.1.6",
-    "vite": "^5.0.0",
-    "vite-tsconfig-paths": "^4.2.1"
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "postcss-cli": "^10.1.0",
+    "run-script-os": "^1.1.6"
   }
 }
